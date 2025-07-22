@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>BrainTrack</title>
+  <link rel="stylesheet" href="styles.css"/>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <!-- Registro -->
+  <div id="auth-view" class="view active">
+    <div class="auth-container">
+      <h1 class="logo-title">🧠 BrainTrack</h1>
+      <h2>Registro</h2>
+      <div class="auth-fields">
+        <input id="username" placeholder="Nombre de usuario"/>
+        <input id="email" placeholder="Correo electrónico"/>
+        <input id="password" type="password" placeholder="Contraseña"/>
+        <button onclick="registerUser()">Registrarse</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- App principal -->
+  <div id="main-app" class="view">
+    <!-- Sidebar -->
+    <aside id="sidebar" class="sidebar hidden">
+      <nav class="menu">
+        <button onclick="navigate('habit-view')">Hábitos</button>
+        <button onclick="navigate('stats-view')">Estadísticas</button>
+        <button onclick="navigate('ranking-view')">Ranking</button>
+        <button onclick="navigate('streak-view')">Racha</button>
+      </nav>
+    </aside>
+
+    <!-- Topbar -->
+    <header class="topbar">
+      <button class="menu-btn" onclick="toggleSidebar()">☰</button>
+      <div id="user-info" class="user-info" onclick="openProfile()">
+        <img id="user-avatar" class="avatar"
+             src="https://www.gravatar.com/avatar/?d=mp&s=200"
+             alt="Perfil"/>
+        <span id="user-name">Usuario</span>
+      </div>
+    </header>
+
+    <!-- Perfil full‑screen -->
+    <section id="profile-view" class="view hidden">
+      <header class="section-header profile-header">
+        <button class="back-arrow" onclick="closeProfile()">← Volver</button>
+        <h2>Perfil de Usuario</h2>
+      </header>
+      <div class="profile-body">
+        <div class="avatar-wrapper">
+          <img id="profile-preview" class="profile-avatar"
+               src="https://www.gravatar.com/avatar/?d=mp&s=200"
+               alt="Avatar"/>
+          <input type="file" id="profile-picture" accept="image/*" disabled/>
+        </div>
+        <div class="profile-fields">
+          <label>Nombre de usuario</label>
+          <input type="text" id="edit-username" disabled/>
+
+          <label>Correo electrónico</label>
+          <input type="email" id="edit-email" disabled/>
+
+          <label>Contraseña</label>
+          <input type="password" id="edit-password" value="••••••••" disabled/>
+
+          <label>Rachas acumuladas</label>
+          <input type="text" id="edit-streak" disabled/>
+        </div>
+        <div class="profile-actions">
+          <button id="btn-edit" class="btn-edit" onclick="toggleEdit()">✎ Editar</button>
+          <button id="btn-save" class="btn-save hidden" onclick="saveProfile()">✔ Guardar</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Hábitos -->
+    <section id="habit-view" class="view content-section active">
+      <h2>Panel de Hábitos</h2>
+      <div class="habit-input-vertical">
+        <input id="new-habit" placeholder="Añadir hábito personalizado"/>
+        <button onclick="addHabit()">Añadir</button>
+      </div>
+      <div id="preset-habits" class="habit-container"></div>
+      <div id="habit-list" class="habit-container"></div>
+    </section>
+
+    <!-- Estadísticas -->
+    <section id="stats-view" class="view content-section">
+      <h2>Estadísticas</h2>
+      <div id="charts" class="chart-grid"></div>
+    </section>
+
+    <!-- Ranking -->
+    <section id="ranking-view" class="view content-section">
+      <h2>Ranking</h2>
+      <table id="ranking-table">
+        <thead><tr><th>👤 Usuario</th><th>🔥 Racha</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </section>
+
+    <!-- Racha -->
+    <section id="streak-view" class="view content-section">
+      <h2>Racha</h2>
+      <div class="streak-panel">
+        <div id="fire-icon" class="fire-icon">🔥</div>
+        <div id="streak-timer">00:00</div>
+        <div class="progress-bar"><div id="streak-progress"></div></div>
+        <div class="streak-label">Racha actual: <span id="streak-count">0</span></div>
+      </div>
+    </section>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
